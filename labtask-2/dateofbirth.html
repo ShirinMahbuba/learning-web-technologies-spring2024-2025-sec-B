@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Date of Birth Validation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            text-align: center;
+        }
+        .dob-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 5px;
+        }
+        .dob-container input {
+            width: 40px;
+            text-align: center;
+        }
+        .dob-labels {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            font-weight: bold;
+        }
+        .error {
+            color: red;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <h3><strong>Date of Birth</strong></h3>
+    <form id="dobForm" onsubmit="return validateDOB()">
+        
+        <!-- Labels -->
+        <div class="dob-labels">
+            <span>dd</span>
+            <span>mm</span>
+            <span>yyyy</span>
+        </div>
+
+        <!-- Inputs -->
+        <div class="dob-container">
+            <input type="text" id="day" name="day" maxlength="2"> /
+            <input type="text" id="month" name="month" maxlength="2"> /
+            <input type="text" id="year" name="year" maxlength="4">
+        </div>
+
+        <br>
+        <span id="dobError" class="error"></span>
+        <br><br>
+        <button type="submit">Submit</button>
+    </form>
+
+    <script>
+        function validateDOB() {
+            let day = document.getElementById("day").value.trim();
+            let month = document.getElementById("month").value.trim();
+            let year = document.getElementById("year").value.trim();
+            let dobError = document.getElementById("dobError");
+
+            dobError.textContent = ""; // Clear previous errors
+
+            if (day === "" || month === "" || year === "") {
+                dobError.textContent = "All fields are required.";
+                return false;
+            }
+
+            // Convert inputs to numbers
+            day = parseInt(day);
+            month = parseInt(month);
+            year = parseInt(year);
+
+            if (isNaN(day) || isNaN(month) || isNaN(year)) {
+                dobError.textContent = "All values must be numbers.";
+                return false;
+            }
+
+            if (day < 1 || day > 31) {
+                dobError.textContent = "Day must be between 1 and 31.";
+                return false;
+            }
+
+            if (month < 1 || month > 12) {
+                dobError.textContent = "Month must be between 1 and 12.";
+                return false;
+            }
+
+            if (year < 1900 || year > 2016) {
+                dobError.textContent = "Year must be between 1900 and 2016.";
+                return false;
+            }
+
+            return true; // Allow form submission
+        }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Degree Selection Validation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            text-align: center;
+        }
+        .degree-container {
+            display: inline-block;
+            text-align: left;
+            border: 1px solid black;
+            padding: 10px;
+        }
+        .degree-options {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        .error {
+            color: red;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <h3><strong>Degree</strong></h3>
+    <form id="degreeForm" onsubmit="return validateDegree()">
+        <div class="degree-container">
+            <div class="degree-options">
+                <input type="checkbox" id="ssc" name="degree" value="SSC">
+                <label for="ssc">SSC</label>
+
+                <input type="checkbox" id="hsc" name="degree" value="HSC">
+                <label for="hsc">HSC</label>
+
+                <input type="checkbox" id="bsc" name="degree" value="BSc">
+                <label for="bsc">BSc</label>
+            </div>
+        </div>
+
+        <br><br>
+        <span id="degreeError" class="error"></span>
+        <br><br>
+        <button type="submit">Submit</button>
+    </form>
+
+    <script>
+        function validateDegree() {
+            let checkboxes = document.querySelectorAll('input[name="degree"]:checked');
+            let degreeError = document.getElementById("degreeError");
+
+            degreeError.textContent = ""; // Clear previous errors
+
+            if (checkboxes.length === 0) {
+                degreeError.textContent = "At least one option must be selected.";
+                return false;
+            }
+
+            return true; // Allow form submission
+        }
+    </script>
+
+</body>
+</html>
